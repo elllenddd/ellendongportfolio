@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ellen Dong | Data Analytics & Product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --bg2: #eee9e0;
+    --surface: #ffffff;
+    --accent: #c8956c;
+    --accent2: #7b9e8a;
+    --ink: #1a1814;
+    --ink2: #4a4540;
+    --ink3: #8a827a;
+    --border: #ddd8cf;
+    --tag-bg: #ede8df;
+    --shadow: 0 2px 20px rgba(0,0,0,0.07);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    --radius: 16px;
+    --radius-sm: 8px;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-cn: 'Noto Serif SC', serif;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="dark"] {
+    --bg: #141210;
+    --bg2: #1e1b18;
+    --surface: #242018;
+    --accent: #e0a87c;
+    --accent2: #8ab89a;
+    --ink: #f0ebe3;
+    --ink2: #c0b8af;
+    --ink3: #807870;
+    --border: #302c26;
+    --tag-bg: #2a2620;
+    --shadow: 0 2px 20px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    transition: background var(--transition), color var(--transition);
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─── */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(247,244,239,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: background var(--transition), border-color var(--transition);
+  }
+  [data-theme="dark"] .site-header { background: rgba(20,18,16,0.92); }
+
+  .header-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem; font-weight: 700;
+    color: #000000; text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  [data-theme="dark"] .logo { color: #ffffff; }
+  .logo span { color: #000000; }
+  [data-theme="dark"] .logo span { color: #ffffff; }
+
+  nav { display: flex; align-items: center; gap: 0.25rem; }
+
+  nav a {
+    font-size: 0.875rem; font-weight: 500;
+    color: var(--ink2); text-decoration: none;
+    padding: 0.4rem 0.75rem; border-radius: 6px;
+    transition: color var(--transition), background var(--transition);
+  }
+  nav a:hover { color: var(--ink); background: var(--tag-bg); }
+
+  .header-controls { display: flex; align-items: center; gap: 0.5rem; }
+
+  .ctrl-btn {
+    display: flex; align-items: center; gap: 0.4rem;
+    background: var(--tag-bg); border: 1px solid var(--border);
+    color: var(--ink2); font-family: var(--font-body);
+    font-size: 0.8rem; font-weight: 500;
+    padding: 0.4rem 0.75rem; border-radius: 20px;
+    cursor: pointer; transition: all var(--transition);
+  }
+  .ctrl-btn:hover { background: var(--surface); color: var(--ink); transform: translateY(-1px); }
+  .ctrl-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 80px 2rem 4rem;
+    background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%);
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(200,149,108,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 420px; gap: 5rem; align-items: center;
+  }
+
+  .hero-text .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--accent); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.35rem 0.9rem; border-radius: 20px;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .hero-text h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700; line-height: 1.1;
+    color: var(--ink); margin-bottom: 1rem;
+  }
+
+  .hero-text h1 .accent-name { color: var(--accent); }
+
+  .hero-tagline {
+    font-size: 1.1rem; color: var(--ink2);
+    max-width: 500px; margin-bottom: 2rem;
+    line-height: 1.65;
+  }
+
+  .hero-badges {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .badge {
+    background: var(--tag-bg); border: 1px solid var(--border);
+    color: var(--ink2); font-size: 0.8rem; font-weight: 500;
+    padding: 0.3rem 0.75rem; border-radius: 20px;
+  }
+  .badge.gold { background: rgba(200,149,108,0.12); border-color: rgba(200,149,108,0.3); color: var(--accent); }
+  .badge.green { background: rgba(123,158,138,0.12); border-color: rgba(123,158,138,0.3); color: var(--accent2); }
+
+  .hero-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    padding: 0.75rem 1.5rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.9rem; text-decoration: none;
+    transition: all var(--transition); border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: #b8845a; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,149,108,0.35); }
+
+  .btn-secondary {
+    background: var(--surface); color: var(--ink2);
+    padding: 0.75rem 1.5rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.9rem; text-decoration: none;
+    border: 1px solid var(--border); transition: all var(--transition);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--ink); transform: translateY(-2px); }
+
+  .btn-resume {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent; color: var(--ink2);
+    padding: 0.75rem 1.25rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.9rem;
+    border: 1.5px dashed var(--border);
+    font-family: var(--font-body);
+    cursor: pointer; transition: all var(--transition);
+  }
+  .btn-resume:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); background: rgba(200,149,108,0.06); }
+
+  .hero-photo-wrap {
+    position: relative; flex-shrink: 0;
+  }
+
+  .photo-card {
+    position: relative; width: 360px; height: 480px;
+    border-radius: 20px; overflow: visible;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .photo-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center top;
+    border-radius: 20px;
+    display: block;
+  }
+
+  .photo-badge {
+    position: relative; margin-top: 0.85rem;
+    background: rgba(247,244,239,0.97);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px; padding: 0.9rem 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border: 1px solid var(--border);
+  }
+  [data-theme="dark"] .photo-badge { background: rgba(20,18,16,0.95); }
+
+  .photo-badge-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), #e0a87c);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; flex-shrink: 0;
+  }
+
+  .photo-badge-text strong {
+    display: block; font-size: 0.85rem; color: var(--ink);
+  }
+  .photo-badge-text span {
+    font-size: 0.75rem; color: var(--ink3);
+  }
+
+  .float-tag {
+    position: absolute;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.6rem 0.9rem;
+    font-size: 0.78rem; font-weight: 600; color: var(--ink2);
+    box-shadow: var(--shadow);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .float-tag.top-right { top: -1rem; right: -2rem; }
+  .float-tag.mid-left { top: 50%; left: -2.5rem; transform: translateY(-50%); }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 5rem 2rem; }
+  section:nth-child(even) { background: var(--bg2); }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-header { margin-bottom: 3rem; }
+
+  .section-label {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--accent); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .section-label::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--accent); }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700; color: var(--ink);
+    line-height: 1.2;
+  }
+
+  /* ─── ABOUT ─── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+  }
+
+  .about-bio p {
+    color: var(--ink2); line-height: 1.8; margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .stat-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 2rem; font-weight: 700; color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label { font-size: 0.8rem; color: var(--ink3); margin-top: 0.25rem; }
+
+  /* ─── EDUCATION ─── */
+  .edu-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+  .edu-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+    position: relative; overflow: hidden;
+  }
+  .edu-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .edu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+  .edu-school { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 0.25rem; }
+  .edu-degree { font-size: 0.9rem; color: var(--accent); font-weight: 600; margin-bottom: 0.2rem; }
+  .edu-meta { font-size: 0.8rem; color: var(--ink3); margin-bottom: 1rem; }
+  .edu-gpa { display: inline-block; background: rgba(200,149,108,0.1); color: var(--accent); font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 1rem; }
+  .edu-bullets { list-style: none; padding: 0; }
+  .edu-bullets li { font-size: 0.85rem; color: var(--ink2); padding: 0.3rem 0; padding-left: 1.2rem; position: relative; }
+  .edu-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.4rem; }
+
+  /* ─── EXPERIENCE TIMELINE ─── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent); }
+
+  .timeline-item {
+    position: relative; padding-bottom: 2.5rem; padding-left: 2rem;
+    animation: fadeInUp 0.5s ease both;
+  }
+
+  .timeline-item::before {
+    content: ''; position: absolute; left: -2.45rem; top: 0.4rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .exp-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.75rem;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .exp-card:hover { transform: translateX(4px); box-shadow: var(--shadow-lg); }
+
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .exp-title { font-weight: 700; font-size: 1rem; color: var(--ink); }
+  .exp-company { color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+  .exp-period { font-size: 0.78rem; color: var(--ink3); background: var(--tag-bg); padding: 0.2rem 0.6rem; border-radius: 4px; white-space: nowrap; }
+  .exp-location { font-size: 0.78rem; color: var(--ink3); margin-bottom: 0.75rem; }
+  .exp-bullets { list-style: none; padding: 0; margin-top: 0.75rem; }
+  .exp-bullets li { font-size: 0.865rem; color: var(--ink2); padding: 0.3rem 0; padding-left: 1.2rem; position: relative; line-height: 1.6; }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent2); font-size: 0.8rem; }
+
+  /* ─── PROJECTS ─── */
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+
+  .project-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.75rem;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+    cursor: default;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .project-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+  .project-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .project-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
+  .project-org { font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-bottom: 0.75rem; }
+  .project-desc { font-size: 0.875rem; color: var(--ink2); line-height: 1.65; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+  .tag { background: var(--tag-bg); color: var(--ink3); font-size: 0.73rem; font-weight: 500; padding: 0.2rem 0.55rem; border-radius: 4px; }
+
+  /* ─── LEADERSHIP (GOLF) ─── */
+  .golf-hero {
+    background: linear-gradient(135deg, #1a3a2a 0%, #2d5a40 100%);
+    border-radius: var(--radius); padding: 2.5rem;
+    color: white; margin-bottom: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .golf-hero::before {
+    content: '⛳';
+    position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
+    font-size: 6rem; opacity: 0.12;
+  }
+  .golf-hero h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .golf-hero p { opacity: 0.85; font-size: 0.95rem; max-width: 600px; }
+
+  .golf-achievements {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;
+  }
+
+  .achievement-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 1.25rem;
+    text-align: center; box-shadow: var(--shadow);
+    transition: transform var(--transition);
+  }
+  .achievement-card:hover { transform: translateY(-3px); }
+  .achievement-card .ach-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .achievement-card .ach-title { font-weight: 700; font-size: 0.9rem; color: var(--ink); }
+  .achievement-card .ach-sub { font-size: 0.78rem; color: var(--ink3); margin-top: 0.25rem; }
+
+  /* ─── SKILLS ─── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+
+  .skill-category {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .skill-cat-title {
+    font-weight: 700; font-size: 0.9rem; color: var(--ink);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .skill-cat-icon { font-size: 1.1rem; }
+
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .skill-pill {
+    background: var(--tag-bg); border: 1px solid var(--border);
+    color: var(--ink2); font-size: 0.8rem; font-weight: 500;
+    padding: 0.3rem 0.65rem; border-radius: 6px;
+    transition: all var(--transition);
+  }
+  .skill-pill:hover { background: rgba(200,149,108,0.12); border-color: var(--accent); color: var(--accent); }
+
+  /* ─── HONORS ─── */
+  .honors-list { display: flex; flex-direction: column; gap: 1rem; }
+  .honor-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 1.25rem;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition);
+  }
+  .honor-item:hover { transform: translateX(4px); }
+  .honor-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .honor-text strong { font-size: 0.95rem; color: var(--ink); display: block; }
+  .honor-text span { font-size: 0.82rem; color: var(--ink3); }
+
+  /* ─── CONTACT ─── */
+  .contact-inner {
+    max-width: 600px; margin: 0 auto; text-align: center;
+  }
+  .contact-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 3rem;
+    box-shadow: var(--shadow-lg);
+  }
+  .contact-card p { color: var(--ink2); margin-bottom: 2rem; line-height: 1.7; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: var(--tag-bg); border: 1px solid var(--border);
+    color: var(--ink2); text-decoration: none;
+    padding: 0.65rem 1.25rem; border-radius: 8px;
+    font-size: 0.875rem; font-weight: 600;
+    transition: all var(--transition);
+  }
+  .contact-link:hover { background: var(--accent); color: white; border-color: var(--accent); transform: translateY(-2px); }
+  .contact-link svg { width: 16px; height: 16px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg2); border-top: 1px solid var(--border);
+    padding: 2rem; text-align: center;
+    font-size: 0.82rem; color: var(--ink3);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .float-tag { animation: float 4s ease-in-out infinite; }
+  .float-tag.mid-left { animation-delay: -2s; }
+
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── LANGUAGE SWITCH ─── */
+  [data-lang-cn] { display: none; }
+  body.lang-cn [data-lang-en] { display: none; }
+  body.lang-cn [data-lang-cn] { display: block; }
+  body.lang-cn .hero-text h1 [data-lang-cn] { display: inline; }
+  body.lang-cn .hero-text h1 [data-lang-en] { display: none; }
+  body.lang-cn .eyebrow [data-lang-cn] { display: inline; }
+  body.lang-cn .eyebrow [data-lang-en] { display: none; }
+
+  .cn { font-family: var(--font-cn); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    #contact .section-inner > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-photo-wrap { display: flex; justify-content: center; }
+    .photo-card { width: 300px; height: 380px; }
+    .float-tag { display: none; }
+    .about-grid, .edu-cards { grid-template-columns: 1fr; }
+    nav { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .section-inner { padding: 0; }
+    section { padding: 4rem 1.25rem; }
+    .hero { padding: 80px 1.25rem 3rem; }
+    .header-inner { padding: 0 1.25rem; }
+    .project-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .stat-cards { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink3); }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo">Ellen<span>.</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#leadership">Leadership</a>
+      
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-controls">
+      <button class="ctrl-btn" id="lang-toggle" onclick="toggleLang()" aria-label="Switch language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="lang-label">中文</span>
+      </button>
+      <button class="ctrl-btn" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span id="theme-label">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section id="top" class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="eyebrow">
+        <span data-lang-en>Columbia University · Class of 2026</span>
+        <span data-lang-cn class="cn">哥伦比亚大学 · 2026届</span>
+      </div>
+      <h1>
+        <span data-lang-en>Hi, I'm <span class="accent-name">Ellen Dong</span></span>
+        <span data-lang-cn class="cn">你好，我是<span class="accent-name">董依玲</span></span>
+      </h1>
+      <p class="hero-tagline" data-lang-en>
+        MS in Business Analytics (Columbia) · Former NCAA Division III National Champion · Passionate about using data and product thinking to create experiences that genuinely improve people's lives.
+      </p>
+      <p class="hero-tagline cn" data-lang-cn>
+        哥伦比亚大学商业分析硕士在读 · NCAA三级全国冠军 · 热衷于数据驱动的产品分析、量化金融与产品管理。
+      </p>
+      <div class="hero-badges">
+        <span class="badge gold">🏆 2× NCAA National Champion</span>
+        <span class="badge">📍 New York, NY</span>
+        <span class="badge green">🎓 Columbia · Emory</span>
+        <span class="badge">📊 Data & Product</span>
+        <span class="badge">⛳ Varsity Golf</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#experience" class="btn-primary" data-lang-en>View My Work</a>
+        <a href="#experience" class="btn-primary cn" data-lang-cn style="display:none">查看我的经历</a>
+        <button onclick="showContactModal()" class="btn-secondary" data-lang-en>Get in Touch</button>
+        <button onclick="showContactModal()" class="btn-secondary cn" data-lang-cn style="display:none">联系我</button>
+        <button onclick="openResumeModal()" class="btn-resume" data-lang-en>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume
+        </button>
+        <button onclick="openResumeModal()" class="btn-resume cn" data-lang-cn style="display:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          简历下载
+        </button>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="float-tag top-right">
+        ⛳ <strong>2× NCAA Champion</strong>
+      </div>
+      <div class="float-tag mid-left">
+        📊 Columbia MSBA
+      </div>
+      <div class="photo-card">
+        <img src="img_0.jpg" alt="Ellen Dong professional headshot">
+        <div class="photo-badge">
+          <div class="photo-badge-icon">🎓</div>
+          <div class="photo-badge-text">
+            <strong data-lang-en>Open to Opportunities</strong>
+            <strong data-lang-cn class="cn" style="display:none">积极寻找工作机会</strong>
+            <span data-lang-en>Internship & Full-time · 2026</span>
+            <span data-lang-cn class="cn" style="display:none">实习 & 全职 · 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-lang-en>About Me</div>
+      <div class="section-label cn" data-lang-cn>关于我</div>
+      <h2 class="section-title" data-lang-en>Data, Product & Championship Mindset</h2>
+      <h2 class="section-title cn" data-lang-cn>数据、产品与冠军心态</h2>
+    </div>
+    <div class="about-grid fade-in">
+      <div class="about-bio">
+        <p data-lang-en>I'm a <strong>Master's student in Business Analytics</strong> at Columbia University (joint Engineering & Business School), with a BS in Applied Math & Statistics and Economics from Emory University (GPA 3.76).</p>
+        <p data-lang-cn class="cn">我是哥伦比亚大学商业分析硕士在读生（工程学院与商学院联合项目），本科就读于埃默里大学，主修应用数学统计与经济学，GPA 3.76。</p>
+        <p data-lang-en>My background spans <strong>business analytics, data analytics, product management,</strong> and <strong>machine learning</strong>. I've applied these skills at companies like Yinhua Fund Management and Treasure Solution, and in academic projects across product design, digital marketing, and ML research.</p>
+        <p data-lang-cn class="cn">我的经历横跨商业分析、数据分析、产品管理与机器学习。曾在银华基金、Treasure Solution等机构实习，并参与多个学术项目。</p>
+        <p data-lang-en>Outside the classroom, I'm a <strong>two-time NCAA Division III National Champion</strong> in women's golf, and served as Co-Captain of the Emory team that won the 2025 national title. Athletics taught me resilience, leadership under pressure, and the value of team culture — qualities I carry into everything I do.</p>
+        <p data-lang-cn class="cn">课堂之外，我是两届NCAA三级全国女子高尔夫冠军，曾担任埃默里大学2025年冠军队的联合队长。体育教会了我在压力下的韧性与领导力。</p>
+      </div>
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-number">3.76</div>
+          <div class="stat-label">Emory GPA · Top Academic Standing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2×</div>
+          <div class="stat-label">NCAA DIII National Champion</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3+</div>
+          <div class="stat-label">Years of Industry Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">ML & Data Projects Shipped</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EDUCATION ═══ -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-lang-en>Education</div>
+      <div class="section-label cn" data-lang-cn>教育背景</div>
+      <h2 class="section-title" data-lang-en>Academic Background</h2>
+      <h2 class="section-title cn" data-lang-cn>学术经历</h2>
+    </div>
+    <div class="edu-cards fade-in">
+      <div class="edu-card">
+        <div class="edu-school">Columbia University</div>
+        <div class="edu-degree" data-lang-en>MS in Business Analytics</div>
+        <div class="edu-degree cn" data-lang-cn>商业分析硕士</div>
+        <div class="edu-meta">New York, NY · Expected Dec 2026 · Columbia Engineering & CBS Joint Program</div>
+        <ul class="edu-bullets">
+          <li data-lang-en>Product Management: AI-driven PRD generation (ChatGPT), rapid prototyping (Lovable), system design (Miro)</li>
+          <li data-lang-en>Courses: Business Analytics, Data Analytics, Marketing Analytics, Product Management, Capital Markets</li>
+          <li data-lang-en>Projects: MSR dashboard (Power BI), YesStyle product redesign, 911Cyber digital marketing campaign</li>
+          <li data-lang-cn class="cn">课程：商业分析、数据分析、营销分析、产品管理、资本市场</li>
+          <li data-lang-cn class="cn">项目：MSR仪表盘、YesStyle产品改进、911Cyber数字营销</li>
+        </ul>
+      </div>
+      <div class="edu-card">
+        <div class="edu-school">Emory University</div>
+        <div class="edu-degree" data-lang-en>BS in Applied Math & Statistics, Economics</div>
+        <div class="edu-degree cn" data-lang-cn>应用数学统计与经济学学士</div>
+        <div class="edu-meta">Atlanta, GA · May 2025</div>
+        <div class="edu-gpa">GPA 3.76 / 4.0</div>
+        <ul class="edu-bullets">
+          <li data-lang-en>Advanced Mathematics: Partial Differential Equations, Numerical Analysis</li>
+          <li data-lang-en>Machine Learning & Programming: Python, R — algorithmic implementation</li>
+          <li data-lang-en>Quantitative Finance, Economic Modeling</li>
+          <li data-lang-en>Nominated for Emory 100 Senior Honorary — recognizing top seniors for leadership & impact</li>
+          <li data-lang-cn class="cn">高等数学：偏微分方程、数值分析</li>
+          <li data-lang-cn class="cn">机器学习：Python、R算法实现</li>
+          <li data-lang-cn class="cn">量化金融、经济建模</li>
+          <li data-lang-cn class="cn">获提名埃默里大学100 Senior Honorary荣誉（表彰领导力与影响力的优秀毕业生）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-lang-en>Experience</div>
+      <div class="section-label cn" data-lang-cn>工作经历</div>
+      <h2 class="section-title" data-lang-en>Work Experience</h2>
+      <h2 class="section-title cn" data-lang-cn>实习与工作经历</h2>
+    </div>
+    <div class="timeline fade-in">
+
+      <div class="timeline-item">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title" data-lang-en>Quantitative Analyst Intern</div>
+              <div class="exp-title cn" data-lang-cn>量化分析实习生</div>
+              <div class="exp-company">Yinhua Fund Management</div>
+            </div>
+            <span class="exp-period">Jun – Aug 2025</span>
+          </div>
+          <div class="exp-location">📍 Beijing, China</div>
+          <ul class="exp-bullets">
+            <li data-lang-en>Analyzed 10 years of Chinese equity & ETF data; proved diversified portfolios delivered superior risk-adjusted returns (higher information ratio, Calmar ratio, lower volatility)</li>
+            <li data-lang-en>Optimized Python-based risk parity model — reduced computational errors by <strong>22%</strong>, improved data consistency across 1,000+ asset database</li>
+            <li data-lang-en>Provided quarterly investment recommendations to senior advisors based on quant analysis, government policy trends, and macroeconomic indicators</li>
+            <li data-lang-en>Created executive-ready visualizations translating complex quantitative findings into actionable insights</li>
+            <li data-lang-cn class="cn">分析10年中国股票与ETF数据，证明多元化资产组合可获得更优风险调整收益</li>
+            <li data-lang-cn class="cn">优化基于Python的风险平价模型，将计算错误减少22%，提升1,000+资产数据库的一致性</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title" data-lang-en>Quantitative Analyst Intern</div>
+              <div class="exp-title cn" data-lang-cn>量化分析实习生</div>
+              <div class="exp-company">Treasure Solution</div>
+            </div>
+            <span class="exp-period">Jun – Aug 2024</span>
+          </div>
+          <div class="exp-location">📍 Jersey City, NJ</div>
+          <ul class="exp-bullets">
+            <li data-lang-en>Demonstrated asset portfolio achieved <strong>5.12% annualized return</strong> with 2.26% volatility vs. CSI 800 benchmark's 21.63% volatility — a <strong>90% reduction</strong> in downside risk</li>
+            <li data-lang-en>Developed Python-based volatility risk model for ETF & securities portfolio with stress-testing and position sizing algorithms</li>
+            <li data-lang-en>Created R visualization suite analyzing 35+ securities against major indices; delivered executive-ready comparative reports</li>
+            <li data-lang-en>Conducted integrated investment research: 5 SWOT analyses, 3 benchmark comparisons, fundamental & technical analysis</li>
+            <li data-lang-cn class="cn">证明资产组合年化收益5.12%、波动率仅2.26%，较CSI 800基准波动率降低90%</li>
+            <li data-lang-cn class="cn">构建Python波动率风险模型，含压力测试与仓位管理算法</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title" data-lang-en>DataThink Project Manager</div>
+              <div class="exp-title cn" data-lang-cn>数据分析项目经理</div>
+              <div class="exp-company">Invest Atlanta & Emory University Center for AI</div>
+            </div>
+            <span class="exp-period">Jan – May 2024</span>
+          </div>
+          <div class="exp-location">📍 Atlanta, GA</div>
+          <ul class="exp-bullets">
+            <li data-lang-en>Led housing displacement research on 2018–2022 Atlanta migration data; optimized data pipeline with <strong>18% efficiency improvement</strong></li>
+            <li data-lang-en>Built regression models using SQL & Python on 10,000+ neighborhood mobility scores; identified Economic Stability index as strongest displacement predictor (β = −14.83, p &lt; 0.001)</li>
+            <li data-lang-en>Presented findings to Invest Atlanta senior leadership, translating statistical analysis into targeted workforce development strategy</li>
+            <li data-lang-cn class="cn">领导亚特兰大住房迁移研究，优化数据管道效率提升18%</li>
+            <li data-lang-cn class="cn">使用SQL与Python构建回归模型，识别经济稳定性指数为最强迁移预测因子</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title" data-lang-en>Marketing Analyst Intern</div>
+              <div class="exp-title cn" data-lang-cn>营销分析实习生</div>
+              <div class="exp-company">TooBit</div>
+            </div>
+            <span class="exp-period">Dec 2022 – Feb 2023</span>
+          </div>
+          <div class="exp-location">📍 Remote</div>
+          <ul class="exp-bullets">
+            <li data-lang-en>Designed and launched user acquisition campaign with $50–$1,000 variable prize structure; achieved significant increase in user engagement through data-driven reward optimization</li>
+            <li data-lang-en>Conducted competitive analysis of 10+ crypto exchange community programs; delivered strategic recommendations enhancing customer experience</li>
+            <li data-lang-en>Partnered with engineering to launch Southeast Asia Telegram community; executed A/B testing on messaging & onboarding flows</li>
+            <li data-lang-cn class="cn">设计并发起用户获取活动，通过数据驱动的激励设计显著提升平台激活率</li>
+            <li data-lang-cn class="cn">对10+加密货币交易所社区项目进行竞品分析，提供战略建议</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-lang-en>Projects</div>
+      <div class="section-label cn" data-lang-cn>学术项目</div>
+      <h2 class="section-title" data-lang-en>Academic Projects & Research</h2>
+      <h2 class="section-title cn" data-lang-cn>学术项目与研究经历</h2>
+    </div>
+    <div class="project-grid fade-in">
+
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <div class="project-title" data-lang-en>MSR Trade Blotter Dashboard</div>
+        <div class="project-title cn" data-lang-cn>MSR交易台账仪表盘</div>
+        <div class="project-org">MIAC Capstone · Columbia University · Jan–Apr 2026</div>
+        <div class="project-desc" data-lang-en>Designed a centralized Power BI dashboard consolidating mortgage servicing rights transaction records, holdings, and hedge positions from multiple sources. Reduced analyst data retrieval time by 30–40%, enabling focus on strategic analysis.</div>
+        <div class="project-desc cn" data-lang-cn>设计集中式Power BI仪表盘，整合MSR交易记录、持仓及对冲头寸，将分析师数据检索时间减少30–40%。</div>
+        <div class="project-tags">
+          <span class="tag">Power BI</span><span class="tag">Financial Data</span><span class="tag">Dashboard Design</span><span class="tag">MSR</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">💄</div>
+        <div class="project-title" data-lang-en>YesStyle Product Redesign</div>
+        <div class="project-title cn" data-lang-cn>YesStyle产品改进</div>
+        <div class="project-org">Product Management · Columbia CBS · Jan–Apr 2026</div>
+        <div class="project-desc" data-lang-en>Surveyed 100+ K-beauty consumers; identified virtual try-on (93% demand), personalized discovery (100% overwhelmed), and streamlined reordering (93%) as top unmet needs. Built PRDs, agile roadmap, data flow architecture (Miro), and functional prototype (Lovable).</div>
+        <div class="project-desc cn" data-lang-cn>调查100+K美容消费者，识别虚拟试妆（93%需求）等核心痛点，完成PRD、敏捷路线图与功能原型。</div>
+        <div class="project-tags">
+          <span class="tag">Product Management</span><span class="tag">User Research</span><span class="tag">PRD</span><span class="tag">Lovable</span><span class="tag">Miro</span>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="openMLSlides()" style="cursor:pointer;" title="Click to view presentation slides">
+        <div class="project-icon">🔍</div>
+        <div style="position:absolute;top:1rem;right:1rem;background:rgba(200,149,108,0.15);border:1px solid rgba(200,149,108,0.3);color:var(--accent);font-size:0.7rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:4px;letter-spacing:0.05em;">▶ VIEW SLIDES</div>
+        <div class="project-title" data-lang-en>Instagram Fake Account Detection</div>
+        <div class="project-title cn" data-lang-cn>Instagram虚假账号检测</div>
+        <div class="project-org">ML Research · Emory University · Aug–Dec 2024</div>
+        <div class="project-desc" data-lang-en>Built a binary classification system using 7 ML models (LR, Decision Tree, Random Forest, SVM, Gradient Boosting, XGBoost, Neural Network). Best model: XGBoost with 94% accuracy, 0.98 ROC-AUC. Applied L1/L2 regularization and k-fold cross-validation.</div>
+        <div class="project-desc cn" data-lang-cn>构建7种机器学习模型的二分类系统，最优XGBoost模型准确率94%，ROC-AUC达0.98。</div>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">XGBoost</span><span class="tag">Neural Network</span><span class="tag">Scikit-learn</span><span class="tag">ML</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🛡️</div>
+        <div class="project-title" data-lang-en>911Cyber Digital Marketing Campaign</div>
+        <div class="project-title cn" data-lang-cn>911Cyber数字营销活动</div>
+        <div class="project-org">Digital Marketing · Columbia · Jan–Mar 2026</div>
+        <div class="project-desc" data-lang-en>Analyzed campaign performance using CTR and CPC metrics; delivered optimization recommendations improving customer journey and conversion for a cybersecurity awareness initiative. Executed multi-channel campaigns with A/B testing.</div>
+        <div class="project-desc cn" data-lang-cn>通过CTR和CPC指标分析营销活动表现，执行多渠道A/B测试，提升网络安全意识转化率。</div>
+        <div class="project-tags">
+          <span class="tag">Digital Marketing</span><span class="tag">A/B Testing</span><span class="tag">CTR/CPC Analytics</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🏠</div>
+        <div class="project-title" data-lang-en>Atlanta Housing Displacement Analysis</div>
+        <div class="project-title cn" data-lang-cn>亚特兰大住房迁移分析</div>
+        <div class="project-org">Invest Atlanta × Emory AI Center · Jan–May 2024</div>
+        <div class="project-desc" data-lang-en>Analyzed 2018–2022 Atlanta migration data using regression models across 10,000+ mobility scores. Identified Economic Stability index as strongest predictor (β = −14.83, p &lt; 0.001). Presented data-driven investment framework to senior leadership.</div>
+        <div class="project-desc cn" data-lang-cn>分析10,000+社区流动性评分，识别经济稳定性为最强迁移预测因子，向高管团队提出数据驱动投资框架。</div>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Regression</span><span class="tag">Policy Analysis</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">📚</div>
+        <div class="project-title" data-lang-en>Academic Scholar Network Platform</div>
+        <div class="project-title cn" data-lang-cn>学术学者网络平台</div>
+        <div class="project-org">Emory Research Lab · Prof. Alejandro Sanchez Becerra · Feb–May 2024</div>
+        <div class="project-desc" data-lang-en>Research assistant for scholar networking platform enabling citation network discovery. Processed 1,000+ datasets in R for knowledge graph visualization. Debugged OpenAlex API scripts — improved citation data accuracy by 25%.</div>
+        <div class="project-desc cn" data-lang-cn>参与学者网络平台研究，处理1,000+数据集构建知识图谱，优化OpenAlex API脚本，引用数据准确率提升25%。</div>
+        <div class="project-tags">
+          <span class="tag">R</span><span class="tag">OpenAlex API</span><span class="tag">Knowledge Graph</span><span class="tag">Data Pipeline</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LEADERSHIP ═══ -->
+<section id="leadership">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-lang-en>Leadership</div>
+      <div class="section-label cn" data-lang-cn>领导力</div>
+      <h2 class="section-title" data-lang-en>Championship Achievement & Leadership</h2>
+      <h2 class="section-title cn" data-lang-cn>冠军成就与领导力</h2>
+    </div>
+
+    <div class="golf-hero fade-in">
+      <h3 data-lang-en>⛳ Emory University Women's Varsity Golf — Co-Team Captain</h3>
+      <h3 data-lang-cn class="cn">⛳ 埃默里大学女子高尔夫队 — 联合队长</h3>
+      <p data-lang-en>Four-year varsity career culminating in the program's most prestigious achievement. As Co-Captain, led the team to the 2025 NCAA Division III National Championship — the second national title of my career. Nominated for Emory's 100 Senior Honorary for leadership and campus impact.</p>
+      <p data-lang-cn class="cn">四年大学高尔夫生涯的最高成就。作为联合队长，带领球队夺得2025年NCAA三级全国冠军——也是我个人生涯的第二个全国冠军。获提名埃默里大学100 Senior Honorary荣誉。</p>
+    </div>
+
+    <div class="golf-achievements fade-in">
+      <div class="achievement-card">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-title" data-lang-en>2025 NCAA DIII National Champion</div>
+        <div class="ach-title cn" data-lang-cn>2025年NCAA三级全国冠军</div>
+        <div class="ach-sub" data-lang-en>Co-Captain · Emory Women's Golf</div>
+        <div class="ach-sub cn" data-lang-cn>联合队长 · 埃默里女子高尔夫</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-icon">🥇</div>
+        <div class="ach-title" data-lang-en>2022 NCAA DIII National Champion</div>
+        <div class="ach-title cn" data-lang-cn>2022年NCAA三级全国冠军</div>
+        <div class="ach-sub" data-lang-en>First title as a first-year player</div>
+        <div class="ach-sub cn" data-lang-cn>大一即夺冠</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-icon">🎖️</div>
+        <div class="ach-title" data-lang-en>Emory 100 Senior Honorary Nominee</div>
+        <div class="ach-title cn" data-lang-cn>埃默里100 Senior Honorary提名</div>
+        <div class="ach-sub" data-lang-en>Nominated for leadership & impact</div>
+        <div class="ach-sub cn" data-lang-cn>因领导力与影响力获提名</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-icon">🎗️</div>
+        <div class="ach-title" data-lang-en>Ralph & Russell Bridges Award</div>
+        <div class="ach-title cn" data-lang-cn>Ralph & Russell Bridges奖</div>
+        <div class="ach-sub" data-lang-en>Most Outstanding All-Around Career · 2024–2025</div>
+        <div class="ach-sub cn" data-lang-cn>最杰出全面职业生涯学生运动员 · 2024–2025</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-icon">🌟</div>
+        <div class="ach-title" data-lang-en>H.Y. McCord III Award</div>
+        <div class="ach-title cn" data-lang-cn>H.Y. McCord III奖</div>
+        <div class="ach-sub" data-lang-en>Most Outstanding Season Performance · 2021–2022</div>
+        <div class="ach-sub cn" data-lang-cn>最杰出赛季表现学生运动员 · 2021–2022</div>
+      </div>
+    </div>
+
+    <!-- ── PHOTO GALLERY ── -->
+    <div class="golf-gallery fade-in">
+      <div class="ggallery-label">Photo Gallery · 2022–2025</div>
+
+      <!-- Main viewer -->
+      <div class="gmain-wrap">
+        <div class="gslides-track" id="gslides">
+
+      <div class="gslide active" data-idx="0">
+        <img src="img_1.jpg" alt="On the 18th tee at NCAA Championships">
+        <div class="gslide-caption">
+          <span class="gslide-tag">Emory Golf</span>
+          <span class="gslide-text">On the 18th tee at NCAA Championships</span>
+        </div>
+      </div>
+      <div class="gslide " data-idx="1">
+        <img src="img_2.jpg" alt="Reading the green — focus before the putt">
+        <div class="gslide-caption">
+          <span class="gslide-tag">Emory Golf</span>
+          <span class="gslide-text">Reading the green — focus before the putt</span>
+        </div>
+      </div>
+      <div class="gslide " data-idx="2">
+        <img src="img_3.jpg" alt="2022 NCAA DIII National Champions — team celebration">
+        <div class="gslide-caption">
+          <span class="gslide-tag">🏆 National Champions</span>
+          <span class="gslide-text">2022 NCAA DIII National Champions — team celebration</span>
+        </div>
+      </div>
+      <div class="gslide " data-idx="3">
+        <img src="img_4.jpg" alt="2022 National Champion trophy with teammates">
+        <div class="gslide-caption">
+          <span class="gslide-tag">🥇 2022 Champions</span>
+          <span class="gslide-text">2022 National Champion trophy with teammates</span>
+        </div>
+      </div>
+      <div class="gslide " data-idx="4">
+        <img src="img_5.jpg" alt="NCAA Championships — team with trophies">
+        <div class="gslide-caption">
+          <span class="gslide-tag">NCAA Championships</span>
+          <span class="gslide-text">NCAA Championships — team with trophies</span>
+        </div>
+      </div>
+      <div class="gslide " data-idx="5">
+        <img src="img_6.jpg" alt="2025 NCAA National Champions on the course">
+        <div class="gslide-caption">
+          <span class="gslide-tag">🏆 2025 Champions</span>
+          <span class="gslide-text">2025 NCAA National Champions on the course</span>
+        </div>
+      </div>
+      <div class="gslide " data-idx="6">
+        <img src="img_7.jpg" alt="2025 National Champions — raising trophies together">
+        <div class="gslide-caption">
+          <span class="gslide-tag">🏆 2025 National Champions</span>
+          <span class="gslide-text">2025 National Champions — raising trophies together</span>
+        </div>
+      </div>
+        </div>
+        <button class="garrow garrow-prev" onclick="shiftSlide(-1)" aria-label="Previous">&#8249;</button>
+        <button class="garrow garrow-next" onclick="shiftSlide(1)" aria-label="Next">&#8250;</button>
+        <div class="gdots" id="gdots"></div>
+      </div>
+
+      <!-- Thumbnails strip -->
+      <div class="gthumbs" id="gthumbs">
+
+      <div class="gthumb active" data-idx="0" onclick="gotoSlide(0)">
+        <img src="img_1.jpg" alt="On the 18th tee at NCAA Championships">
+        <div class="gthumb-overlay"></div>
+      </div>
+      <div class="gthumb " data-idx="1" onclick="gotoSlide(1)">
+        <img src="img_2.jpg" alt="Reading the green — focus before the putt">
+        <div class="gthumb-overlay"></div>
+      </div>
+      <div class="gthumb " data-idx="2" onclick="gotoSlide(2)">
+        <img src="img_3.jpg" alt="2022 NCAA DIII National Champions — team celebration">
+        <div class="gthumb-overlay"></div>
+      </div>
+      <div class="gthumb " data-idx="3" onclick="gotoSlide(3)">
+        <img src="img_4.jpg" alt="2022 National Champion trophy with teammates">
+        <div class="gthumb-overlay"></div>
+      </div>
+      <div class="gthumb " data-idx="4" onclick="gotoSlide(4)">
+        <img src="img_5.jpg" alt="NCAA Championships — team with trophies">
+        <div class="gthumb-overlay"></div>
+      </div>
+      <div class="gthumb " data-idx="5" onclick="gotoSlide(5)">
+        <img src="img_6.jpg" alt="2025 NCAA National Champions on the course">
+        <div class="gthumb-overlay"></div>
+      </div>
+      <div class="gthumb " data-idx="6" onclick="gotoSlide(6)">
+        <img src="img_7.jpg" alt="2025 National Champions — raising trophies together">
+        <div class="gthumb-overlay"></div>
+      </div>
+      </div>
+    </div>
+
+    <style>
+      .golf-gallery { margin-top: 2.5rem; }
+      .ggallery-label {
+        font-size: 0.78rem; font-weight: 600; color: var(--accent);
+        letter-spacing: 0.1em; text-transform: uppercase;
+        margin-bottom: 1rem;
+        display: flex; align-items: center; gap: 0.5rem;
+      }
+      .ggallery-label::before { content: ''; display: inline-block; width: 20px; height: 2px; background: var(--accent); }
+
+      /* Main viewer */
+      .gmain-wrap {
+        position: relative; border-radius: 20px; overflow: hidden;
+        background: #000; aspect-ratio: 16/9;
+        box-shadow: var(--shadow-lg);
+        margin-bottom: 0.75rem;
+      }
+      .gslides-track { position: relative; width: 100%; height: 100%; }
+      .gslide {
+        position: absolute; inset: 0;
+        opacity: 0; transition: opacity 0.5s ease;
+        pointer-events: none;
+      }
+      .gslide.active { opacity: 1; pointer-events: auto; }
+      .gslide img {
+        width: 100%; height: 100%; object-fit: cover;
+        display: block;
+      }
+      .gslide-caption {
+        position: absolute; bottom: 0; left: 0; right: 0;
+        background: linear-gradient(transparent, rgba(0,0,0,0.72));
+        padding: 2rem 1.5rem 1.25rem;
+        display: flex; flex-direction: column; gap: 0.3rem;
+        transform: translateY(0); transition: opacity 0.3s;
+      }
+      .gslide-tag {
+        font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+        text-transform: uppercase; color: #ffd700;
+      }
+      .gslide-text {
+        font-size: 0.9rem; color: rgba(255,255,255,0.92);
+        font-weight: 500;
+      }
+
+      /* Arrow buttons */
+      .garrow {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        background: rgba(255,255,255,0.18); backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.25); color: #fff;
+        width: 44px; height: 44px; border-radius: 50%;
+        font-size: 1.5rem; line-height: 1; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.2s; z-index: 2;
+      }
+      .garrow:hover { background: rgba(255,255,255,0.35); transform: translateY(-50%) scale(1.1); }
+      .garrow-prev { left: 1rem; }
+      .garrow-next { right: 1rem; }
+
+      /* Dots */
+      .gdots {
+        position: absolute; bottom: 0.75rem; left: 50%; transform: translateX(-50%);
+        display: flex; gap: 0.4rem; z-index: 2;
+      }
+      .gdot {
+        width: 7px; height: 7px; border-radius: 50%;
+        background: rgba(255,255,255,0.45); cursor: pointer;
+        transition: all 0.2s; border: none;
+      }
+      .gdot.active { background: #fff; transform: scale(1.3); }
+
+      /* Thumbnails */
+      .gthumbs {
+        display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem;
+      }
+      .gthumb {
+        position: relative; aspect-ratio: 1/1; border-radius: 10px;
+        overflow: hidden; cursor: pointer;
+        border: 2px solid transparent; transition: all 0.2s;
+      }
+      .gthumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+      .gthumb-overlay {
+        position: absolute; inset: 0;
+        background: rgba(0,0,0,0.35); transition: opacity 0.2s;
+      }
+      .gthumb:hover .gthumb-overlay { opacity: 0; }
+      .gthumb:hover img { transform: scale(1.08); }
+      .gthumb.active {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px var(--accent);
+      }
+      .gthumb.active .gthumb-overlay { opacity: 0; }
+
+      /* Lightbox */
+      #glightbox {
+        display: none; position: fixed; inset: 0; z-index: 999;
+        background: rgba(0,0,0,0.92); backdrop-filter: blur(6px);
+        align-items: center; justify-content: center;
+        cursor: zoom-out;
+      }
+      #glightbox.open { display: flex; }
+      #glightbox img {
+        max-width: 92vw; max-height: 88vh;
+        border-radius: 12px; box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+        cursor: default; animation: fadeInUp 0.3s ease;
+      }
+      .glb-close {
+        position: fixed; top: 1.25rem; right: 1.5rem;
+        background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+        color: #fff; font-size: 1.4rem; width: 42px; height: 42px;
+        border-radius: 50%; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s;
+      }
+      .glb-close:hover { background: rgba(255,255,255,0.25); }
+      .glb-caption {
+        position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+        background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+        color: #fff; padding: 0.6rem 1.5rem; border-radius: 30px;
+        font-size: 0.875rem; white-space: nowrap;
+      }
+
+      @media (max-width: 700px) {
+        .gthumbs { grid-template-columns: repeat(4, 1fr); }
+        .garrow { width: 36px; height: 36px; font-size: 1.2rem; }
+      }
+      @media (max-width: 450px) {
+        .gthumbs { grid-template-columns: repeat(3, 1fr); }
+      }
+    </style>
+
+    <!-- Lightbox -->
+    <div id="glightbox" onclick="closeLightbox()">
+      <button class="glb-close" onclick="closeLightbox()">✕</button>
+      <img id="glightbox-img" src="" alt="">
+      <div class="glb-caption" id="glightbox-cap"></div>
+    </div>
+
+    <script>
+      // ── GALLERY ──
+      const PHOTOS = [{'uri': 'img_1.jpg', 'caption': 'On the 18th tee at NCAA Championships', 'tag': 'Emory Golf'}, {'uri': 'img_2.jpg', 'caption': 'Reading the green — focus before the putt', 'tag': 'Emory Golf'}, {'uri': 'img_3.jpg', 'caption': '2022 NCAA DIII National Champions — team celebration', 'tag': '🏆 National Champions'}, {'uri': 'img_4.jpg', 'caption': '2022 National Champion trophy with teammates', 'tag': '🥇 2022 Champions'}, {'uri': 'img_5.jpg', 'caption': 'NCAA Championships — team with trophies', 'tag': 'NCAA Championships'}, {'uri': 'img_6.jpg', 'caption': '2025 NCAA National Champions on the course', 'tag': '🏆 2025 Champions'}, {'uri': 'img_7.jpg', 'caption': '2025 National Champions — raising trophies together', 'tag': '🏆 2025 National Champions'}];
+      let gCurrent = 0;
+      let gAutoplay;
+
+      function buildDots() {
+        const dotsEl = document.getElementById('gdots');
+        dotsEl.innerHTML = '';
+        PHOTOS.forEach((_, i) => {
+          const d = document.createElement('button');
+          d.className = 'gdot' + (i === 0 ? ' active' : '');
+          d.onclick = (e) => { e.stopPropagation(); gotoSlide(i); };
+          dotsEl.appendChild(d);
+        });
+      }
+
+      function gotoSlide(idx) {
+        document.querySelectorAll('.gslide').forEach((s, i) => s.classList.toggle('active', i === idx));
+        document.querySelectorAll('.gthumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+        document.querySelectorAll('.gdot').forEach((d, i) => d.classList.toggle('active', i === idx));
+        gCurrent = idx;
+        // Scroll thumbnail into view
+        const thumb = document.querySelectorAll('.gthumb')[idx];
+        if (thumb) thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+
+      function shiftSlide(dir) {
+        gotoSlide((gCurrent + dir + PHOTOS.length) % PHOTOS.length);
+        resetAutoplay();
+      }
+
+      function resetAutoplay() {
+        clearInterval(gAutoplay);
+        // Autoplay disabled — user controls navigation manually
+      }
+
+      // Open lightbox on main image click
+      document.querySelectorAll('.gslide img').forEach((img, i) => {
+        img.style.cursor = 'zoom-in';
+        img.onclick = (e) => { e.stopPropagation(); openLightbox(i); };
+      });
+
+      function openLightbox(idx) {
+        const lb = document.getElementById('glightbox');
+        document.getElementById('glightbox-img').src = PHOTOS[idx].uri;
+        document.getElementById('glightbox-cap').textContent = PHOTOS[idx].caption;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox() {
+        document.getElementById('glightbox').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') shiftSlide(-1);
+        if (e.key === 'ArrowRight') shiftSlide(1);
+      });
+
+      // Touch/swipe support
+      let touchStartX = 0;
+      document.querySelector('.gmain-wrap').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
+      document.querySelector('.gmain-wrap').addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) shiftSlide(dx < 0 ? 1 : -1);
+      }, {passive: true});
+
+      buildDots();
+      resetAutoplay();
+    </script>
+
+  </div>
+</section>
+
+<!-- ═══ HONORS ═══ --><!-- ═══ HONORS ═══ -->
+<section id="honors">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-lang-en>Honors</div>
+      <div class="section-label cn" data-lang-cn>荣誉</div>
+      <h2 class="section-title" data-lang-en>Honors & Certifications</h2>
+      <h2 class="section-title cn" data-lang-cn>荣誉与证书</h2>
+    </div>
+    <div class="honors-list fade-in">
+      <div class="honor-item">
+        <span class="honor-icon">🏆</span>
+        <div class="honor-text">
+          <strong>2025 NCAA Division III Women's Golf National Champion</strong>
+          <span>Co-Team Captain · Emory University</span>
+        </div>
+      </div>
+      <div class="honor-item">
+        <span class="honor-icon">🥇</span>
+        <div class="honor-text">
+          <strong>2022 NCAA Division III Women's Golf Individual National Champion</strong>
+          <span>Individual Title · Emory University</span>
+        </div>
+      </div>
+      <div class="honor-item">
+        <span class="honor-icon">🏅</span>
+        <div class="honor-text">
+          <strong>2022 NCAA Division III Women's Golf National Champion</strong>
+          <span>Team Title · Player · Emory University</span>
+        </div>
+      </div>
+      <div class="honor-item">
+        <span class="honor-icon">🎖️</span>
+        <div class="honor-text">
+          <strong>Emory University 100 Senior Honorary Nominee</strong>
+          <span>Nominated for top seniors recognition in leadership & campus impact</span>
+        </div>
+      </div>
+      <div class="honor-item">
+        <span class="honor-icon">📜</span>
+        <div class="honor-text">
+          <strong>Google Analytics Professional Certificate</strong>
+          <span>Google · Digital Analytics Certification</span>
+        </div>
+      </div>
+      <div class="honor-item">
+        <span class="honor-icon">🎗️</span>
+        <div class="honor-text">
+          <strong>Ralph & Russell Bridges Award (2024–2025)</strong>
+          <span>Recognizes the most outstanding all-around career of a student-athlete · Emory University Women's Golf</span>
+        </div>
+      </div>
+      <div class="honor-item">
+        <span class="honor-icon">🌟</span>
+        <div class="honor-text">
+          <strong>H.Y. McCord III Award (2021–2022)</strong>
+          <span>Honors the most outstanding season performance by a student-athlete · Emory University Women's Golf</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" style="background:var(--bg2);">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+
+      <!-- Left: Let's Connect text -->
+      <div class="fade-in">
+        <div class="section-label" data-lang-en style="margin-bottom:0.75rem;">Contact</div>
+        <div class="section-label cn" data-lang-cn style="margin-bottom:0.75rem;">联系我</div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(2.5rem,4vw,3.5rem);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:1.5rem;">
+          <span data-lang-en>Let's<br><em style="font-style:italic;color:var(--ink3);">Connect</em></span>
+          <span data-lang-cn class="cn">联系<br><em style="font-style:italic;color:var(--ink3);">我吧</em></span>
+        </h2>
+        <p style="color:var(--ink2);font-size:1rem;line-height:1.7;margin-bottom:2rem;max-width:420px;" data-lang-en>Open to internship & full-time roles in business analytics, data analytics, product management, and product marketing. I reply within 24 hours.</p>
+        <p style="color:var(--ink2);font-size:1rem;line-height:1.7;margin-bottom:2rem;max-width:420px;" class="cn" data-lang-cn>欢迎联系我！我正在寻找商业分析、数据分析、产品管理与产品营销相关机会，24小时内回复。</p>
+
+        <!-- Contact rows -->
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+          <a href="mailto:sd3968@columbia.edu" onclick="showContactToast('📧 Opening your email client…')" style="display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;color:var(--ink);transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateX(0)'">
+            <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#c8956c,#e0a87c);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:0.875rem;color:var(--ink);">sd3968@columbia.edu</div>
+              <div style="font-size:0.78rem;color:var(--ink3);" data-lang-en>Replies within 24h</div>
+              <div style="font-size:0.78rem;color:var(--ink3);" class="cn" data-lang-cn>24小时内回复</div>
+            </div>
+            <svg style="margin-left:auto;color:var(--ink3);" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+
+          <a href="https://www.linkedin.com/in/ellendong1" target="_blank" rel="noopener" onclick="showContactToast('🔗 Opening LinkedIn…')" style="display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;color:var(--ink);transition:all 0.2s;" onmouseover="this.style.borderColor='#0a66c2';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateX(0)'">
+            <div style="width:42px;height:42px;border-radius:10px;background:#0a66c2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:0.875rem;color:var(--ink);">linkedin.com/in/ellendong1</div>
+              <div style="font-size:0.78rem;color:var(--ink3);" data-lang-en>Connect on LinkedIn</div>
+              <div style="font-size:0.78rem;color:var(--ink3);" class="cn" data-lang-cn>领英连接</div>
+            </div>
+            <svg style="margin-left:auto;color:var(--ink3);" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+
+          <button onclick="showPhoneModal()" style="display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;cursor:pointer;font-family:var(--font-body);color:var(--ink);width:100%;transition:all 0.2s;text-align:left;" onmouseover="this.style.borderColor='var(--accent2)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateX(0)'">
+            <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#7b9e8a,#8ab89a);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:0.875rem;color:var(--ink);">(407) 458-6512</div>
+              <div style="font-size:0.78rem;color:var(--ink3);" data-lang-en>Call or text anytime</div>
+              <div style="font-size:0.78rem;color:var(--ink3);" class="cn" data-lang-cn>随时致电</div>
+            </div>
+            <svg style="margin-left:auto;color:var(--ink3);" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Resume preview card -->
+      <div class="fade-in" style="display:flex;flex-direction:column;gap:1.25rem;">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);">
+          <!-- Resume header -->
+          <div style="background:linear-gradient(135deg,#1a1814,#2d2620);padding:1.5rem 1.75rem;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="color:rgba(255,255,255,0.5);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;" data-lang-en>Resume</div>
+              <div style="color:rgba(255,255,255,0.5);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;" class="cn" data-lang-cn>个人简历</div>
+              <div style="color:#fff;font-family:var(--font-display);font-size:1.1rem;font-weight:700;">Ellen Dong</div>
+              <div style="color:rgba(255,255,255,0.6);font-size:0.78rem;margin-top:0.2rem;" data-lang-en>Columbia MSBA · Class of 2026</div>
+              <div style="color:rgba(255,255,255,0.6);font-size:0.78rem;margin-top:0.2rem;" class="cn" data-lang-cn>哥伦比亚大学商业分析硕士 · 2026届</div>
+            </div>
+            <div style="width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,0.2);flex-shrink:0;">
+              <img src="img_0.jpg" alt="Ellen" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+            </div>
+          </div>
+          <!-- Resume body preview -->
+          <div style="padding:1.25rem 1.75rem;display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="font-size:0.72rem;font-weight:700;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;" data-lang-en>Highlights</div>
+            <div style="font-size:0.72rem;font-weight:700;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;" class="cn" data-lang-cn>简历亮点</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+              <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.82rem;color:var(--ink2);">
+                <span style="color:var(--accent);">🎓</span> Columbia MSBA · Emory BS Applied Math & Stats
+              </div>
+              <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.82rem;color:var(--ink2);">
+                <span style="color:var(--accent);">💼</span> Yinhua Fund · Invest Atlanta · TooBit
+              </div>
+              <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.82rem;color:var(--ink2);">
+                <span style="color:var(--accent);">🏆</span> 2× NCAA DIII National Champion
+              </div>
+              <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.82rem;color:var(--ink2);">
+                <span style="color:var(--accent);">📊</span> Python · SQL · Power BI · Tableau · R
+              </div>
+            </div>
+          </div>
+          <!-- Resume actions -->
+          <div style="padding:1rem 1.75rem;border-top:1px solid var(--border);display:flex;gap:0.75rem;">
+            <button onclick="openResumeModal()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:0.5rem;background:var(--accent);color:#fff;border:none;padding:0.75rem;border-radius:10px;font-family:var(--font-body);font-size:0.875rem;font-weight:600;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#b8845a'" onmouseout="this.style.background='var(--accent)'">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span data-lang-en>View Resume</span><span class="cn" data-lang-cn>查看简历</span>
+            </button>
+            <a href="resume_0.pdf" download="EllenDong_Resume.pdf" style="flex:1;display:flex;align-items:center;justify-content:center;gap:0.5rem;background:var(--tag-bg);color:var(--ink2);border:1px solid var(--border);padding:0.75rem;border-radius:10px;font-size:0.875rem;font-weight:600;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--ink)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--ink2)'">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span data-lang-en>Download</span><span class="cn" data-lang-cn>下载简历</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Contact Info Modal (Get in Touch) -->
+  <div id="contact-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:2.5rem;max-width:420px;width:92%;box-shadow:var(--shadow-lg);animation:fadeInUp 0.3s ease;position:relative;">
+      <button onclick="closeContactModal()" style="position:absolute;top:1rem;right:1rem;background:var(--tag-bg);border:1px solid var(--border);color:var(--ink3);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--tag-bg)'">✕</button>
+      <div style="text-align:center;margin-bottom:1.75rem;">
+        <div style="font-size:2.5rem;margin-bottom:0.75rem;">👋</div>
+        <h3 style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:0.4rem;">Let's Connect!</h3>
+        <p style="font-size:0.875rem;color:var(--ink3);line-height:1.6;">Open to opportunities in business analytics, data analytics, product management & product marketing.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <a href="mailto:sd3968@columbia.edu" onclick="showContactToast('📧 Opening your email client…')" style="display:flex;align-items:center;gap:1rem;background:var(--tag-bg);border:1px solid var(--border);border-radius:14px;padding:1rem 1.25rem;text-decoration:none;transition:all 0.2s;color:var(--ink);" onmouseover="this.style.background='rgba(200,149,108,0.12)';this.style.borderColor='var(--accent)'" onmouseout="this.style.background='var(--tag-bg)';this.style.borderColor='var(--border)'">
+          <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#c8956c,#e0a87c);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:0.875rem;color:var(--ink);">Email</div>
+            <div style="font-size:0.82rem;color:var(--ink3);">sd3968@columbia.edu</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/ellendong1" target="_blank" rel="noopener" onclick="showContactToast('🔗 Opening LinkedIn…')" style="display:flex;align-items:center;gap:1rem;background:var(--tag-bg);border:1px solid var(--border);border-radius:14px;padding:1rem 1.25rem;text-decoration:none;transition:all 0.2s;color:var(--ink);" onmouseover="this.style.background='rgba(10,102,194,0.08)';this.style.borderColor='#0a66c2'" onmouseout="this.style.background='var(--tag-bg)';this.style.borderColor='var(--border)'">
+          <div style="width:42px;height:42px;border-radius:10px;background:#0a66c2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;font-size:0.875rem;color:var(--ink);">LinkedIn</div>
+            <div style="font-size:0.82rem;color:var(--ink3);">linkedin.com/in/ellendong1</div>
+          </div>
+        </a>
+        <button onclick="closeContactModal();showPhoneModal();" style="display:flex;align-items:center;gap:1rem;background:var(--tag-bg);border:1px solid var(--border);border-radius:14px;padding:1rem 1.25rem;cursor:pointer;transition:all 0.2s;width:100%;font-family:var(--font-body);color:var(--ink);" onmouseover="this.style.background='rgba(123,158,138,0.12)';this.style.borderColor='var(--accent2)'" onmouseout="this.style.background='var(--tag-bg)';this.style.borderColor='var(--border)'">
+          <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#7b9e8a,#8ab89a);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div style="text-align:left;">
+            <div style="font-weight:700;font-size:0.875rem;color:var(--ink);">Phone</div>
+            <div style="font-size:0.82rem;color:var(--ink3);">(407) 458-6512</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phone Modal -->
+  <div id="phone-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;max-width:360px;width:90%;text-align:center;box-shadow:var(--shadow-lg);animation:fadeInUp 0.3s ease;">
+      <div style="font-size:3rem;margin-bottom:1rem;">📱</div>
+      <h3 style="font-family:var(--font-display);font-size:1.3rem;color:var(--ink);margin-bottom:0.5rem;">Call Ellen</h3>
+      <p style="color:var(--ink3);font-size:0.875rem;margin-bottom:1.5rem;">Tap the number to call directly</p>
+      <a href="tel:4074586512" style="display:block;background:var(--accent);color:#fff;font-size:1.4rem;font-weight:700;letter-spacing:0.05em;padding:1rem;border-radius:12px;text-decoration:none;margin-bottom:1rem;transition:all 0.2s;" onmouseover="this.style.background='#b8845a'" onmouseout="this.style.background='var(--accent)'">
+        (407) 458-6512
+      </a>
+      <button onclick="closePhoneModal()" style="background:var(--tag-bg);border:1px solid var(--border);color:var(--ink2);padding:0.6rem 1.5rem;border-radius:8px;font-family:var(--font-body);font-size:0.875rem;cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="contact-toast" style="display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:0.75rem 1.5rem;border-radius:30px;font-size:0.875rem;font-weight:500;z-index:998;white-space:nowrap;box-shadow:var(--shadow-lg);animation:fadeInUp 0.3s ease;"></div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p data-lang-en>© 2026 Ellen Dong · Columbia MSBA · Built with care ✨</p>
+  <p data-lang-cn class="cn">© 2026 董依玲 · 哥伦比亚大学商业分析硕士 · 用心制作 ✨</p>
+</footer>
+
+<script>
+  // ── THEME TOGGLE ──
+  const root = document.documentElement;
+  const themeIcon = document.getElementById('theme-icon');
+  const themeLabel = document.getElementById('theme-label');
+  let isDark = false;
+
+  function toggleTheme() {
+    isDark = !isDark;
+    root.setAttribute('data-theme', isDark ? 'dark' : '');
+    if (isDark) {
+      themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor" stroke="none"/>';
+      themeLabel.textContent = 'Light';
+    } else {
+      themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+      themeLabel.textContent = 'Dark';
+    }
+  }
+
+  // ── LANGUAGE TOGGLE ──
+  let isZH = false;
+  const langLabel = document.getElementById('lang-label');
+
+  function toggleLang() {
+    isZH = !isZH;
+    document.body.classList.toggle('lang-cn', isZH);
+    langLabel.textContent = isZH ? 'EN' : '中文';
+
+    // Handle hero CTA buttons which need special inline display control
+    document.querySelectorAll('.hero-ctas .btn-primary[data-lang-cn], .hero-ctas .btn-secondary[data-lang-cn], .hero-ctas .btn-resume[data-lang-cn]').forEach(el => {
+      el.style.display = isZH ? 'inline-flex' : 'none';
+    });
+    document.querySelectorAll('.hero-ctas .btn-primary[data-lang-en], .hero-ctas .btn-secondary[data-lang-en], .hero-ctas .btn-resume[data-lang-en]').forEach(el => {
+      el.style.display = isZH ? 'none' : 'inline-flex';
+    });
+
+    // Photo badge strong/span
+    document.querySelectorAll('.photo-badge-text strong[data-lang-cn], .photo-badge-text span[data-lang-cn]').forEach(el => {
+      el.style.display = isZH ? 'block' : 'none';
+    });
+    document.querySelectorAll('.photo-badge-text strong[data-lang-en], .photo-badge-text span[data-lang-en]').forEach(el => {
+      el.style.display = isZH ? 'none' : 'block';
+    });
+
+    // Section labels (flex items)
+    document.querySelectorAll('.section-label[data-lang-cn]').forEach(el => {
+      el.style.display = isZH ? 'inline-flex' : 'none';
+    });
+    document.querySelectorAll('.section-label[data-lang-en]').forEach(el => {
+      el.style.display = isZH ? 'none' : 'inline-flex';
+    });
+  }
+
+  // ── SCROLL ANIMATIONS ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── CONTACT INFO MODAL (Get in Touch) ──
+  function showContactModal() {
+    const modal = document.getElementById('contact-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeContactModal() {
+    document.getElementById('contact-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('contact-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeContactModal();
+  });
+
+  // ── PHONE MODAL ──
+  function showPhoneModal() {
+    const modal = document.getElementById('phone-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closePhoneModal() {
+    document.getElementById('phone-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('phone-modal').addEventListener('click', function(e) {
+    if (e.target === this) closePhoneModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closePhoneModal(); closeContactModal(); closeResumeModal(); }
+  });
+
+  // ── TOAST ──
+  let toastTimer;
+  function showContactToast(msg) {
+    const toast = document.getElementById('contact-toast');
+    toast.textContent = msg;
+    toast.style.display = 'block';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 3000);
+  }
+
+  // ── SMOOTH ACTIVE NAV ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 100) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+      a.style.background = a.getAttribute('href') === '#' + current ? 'var(--tag-bg)' : '';
+    });
+  }, { passive: true });
+
+  // ── ML SLIDES MODAL ──
+const ML_SLIDES = ["img_8.jpg", "img_9.jpg", "img_10.jpg", "img_11.jpg", "img_12.jpg", "img_13.jpg", "img_14.jpg", "img_15.jpg", "img_16.jpg", "img_17.jpg", "img_18.jpg", "img_19.jpg", "img_20.jpg", "img_21.jpg", "img_22.jpg", "img_23.jpg", "img_24.jpg", "img_25.jpg", "img_26.jpg", "img_27.jpg", "img_28.jpg", "img_29.jpg", "img_30.jpg", "img_31.jpg", "img_32.jpg", "img_33.jpg"];
+
+  let mlCurrent = 0;
+
+  function openMLSlides() {
+    mlCurrent = 0;
+    buildMLThumbs();
+    mlGoto(0);
+    document.getElementById('ml-slides-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMLSlides() {
+    document.getElementById('ml-slides-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function mlGoto(idx) {
+    mlCurrent = Math.max(0, Math.min(idx, ML_SLIDES.length - 1));
+    document.getElementById('ml-slide-img').src = ML_SLIDES[mlCurrent];
+    document.getElementById('ml-slide-counter').textContent = (mlCurrent + 1) + ' / ' + ML_SLIDES.length;
+    // Highlight active thumb
+    document.querySelectorAll('.ml-thumb').forEach((t, i) => {
+      t.style.border = i === mlCurrent ? '2px solid #c8956c' : '2px solid transparent';
+      t.style.opacity = i === mlCurrent ? '1' : '0.5';
+    });
+    // Scroll thumb into view
+    const thumb = document.querySelectorAll('.ml-thumb')[mlCurrent];
+    if (thumb) thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+  function mlShift(dir) {
+    mlGoto(mlCurrent + dir);
+  }
+  function buildMLThumbs() {
+    const strip = document.getElementById('ml-thumbs');
+    if (strip.children.length > 0) return; // already built
+    ML_SLIDES.forEach((uri, i) => {
+      const img = document.createElement('img');
+      img.src = uri;
+      img.className = 'ml-thumb';
+      img.style.cssText = 'height:50px;border-radius:4px;cursor:pointer;flex-shrink:0;border:2px solid transparent;opacity:0.5;transition:all 0.2s;';
+      img.onclick = () => mlGoto(i);
+      strip.appendChild(img);
+    });
+  }
+  document.getElementById('ml-slides-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeMLSlides();
+  });
+  // Keyboard nav for slides
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('ml-slides-modal').style.display === 'flex') {
+      if (e.key === 'ArrowLeft') mlShift(-1);
+      if (e.key === 'ArrowRight') mlShift(1);
+      if (e.key === 'Escape') closeMLSlides();
+    }
+  });
+
+  
+  // ── RESUME MODAL ──
+  const RESUME_URI = "resume_0.pdf";
+  function openResumeModal() {
+    document.getElementById('resume-iframe').src = RESUME_URI;
+    document.getElementById('resume-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeResumeModal() {
+    document.getElementById('resume-modal').style.display = 'none';
+    document.getElementById('resume-iframe').src = '';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('resume-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeResumeModal();
+  });
+
+  </script>
+
+
+  <!-- ML Slides Modal -->
+  <div id="ml-slides-modal" style="display:none;position:fixed;inset:0;z-index:1001;background:rgba(0,0,0,0.92);backdrop-filter:blur(6px);align-items:center;justify-content:center;flex-direction:column;">
+    <div style="position:relative;width:92vw;max-width:900px;display:flex;flex-direction:column;align-items:center;gap:1rem;">
+      <!-- Header bar -->
+      <div style="width:100%;display:flex;align-items:center;justify-content:space-between;">
+        <div style="color:#fff;font-size:0.875rem;font-weight:600;opacity:0.8;">🔍 Instagram Fake Account Detection — ML Research</div>
+        <button onclick="closeMLSlides()" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">✕</button>
+      </div>
+      <!-- Slide viewer -->
+      <div style="position:relative;width:100%;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6);">
+        <img id="ml-slide-img" src="" alt="Slide" style="width:100%;display:block;">
+        <!-- Prev/Next arrows -->
+        <button onclick="mlShift(-1)" style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.18);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.35)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">&#8249;</button>
+        <button onclick="mlShift(1)" style="position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.18);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.35)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">&#8250;</button>
+      </div>
+      <!-- Controls row -->
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <button onclick="mlShift(-1)" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:0.4rem 1rem;border-radius:6px;font-size:0.8rem;cursor:pointer;">&#8592; Prev</button>
+        <span id="ml-slide-counter" style="color:#fff;font-size:0.875rem;opacity:0.7;min-width:80px;text-align:center;">1 / 26</span>
+        <button onclick="mlShift(1)" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:0.4rem 1rem;border-radius:6px;font-size:0.8rem;cursor:pointer;">Next &#8594;</button>
+      </div>
+      <!-- Thumbnail strip -->
+      <div id="ml-thumbs" style="display:flex;gap:0.4rem;overflow-x:auto;max-width:100%;padding-bottom:0.25rem;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.2) transparent;"></div>
+    </div>
+  </div>
+
+
+  <!-- Resume Modal -->
+  <div id="resume-modal" style="display:none;position:fixed;inset:0;z-index:1002;background:rgba(0,0,0,0.88);backdrop-filter:blur(6px);align-items:center;justify-content:center;flex-direction:column;gap:1rem;">
+    <div style="width:92vw;max-width:820px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="color:#fff;font-weight:700;font-size:0.95rem;">📄 Ellen Dong — Resume</div>
+      <div style="display:flex;gap:0.75rem;align-items:center;">
+        <a href="resume_0.pdf" download="EllenDong_Resume.pdf" style="display:flex;align-items:center;gap:0.5rem;background:var(--accent);color:#fff;padding:0.5rem 1.1rem;border-radius:8px;font-size:0.85rem;font-weight:600;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#b8845a'" onmouseout="this.style.background='var(--accent)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
+        <button onclick="closeResumeModal()" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;width:36px;height:36px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">✕</button>
+      </div>
+    </div>
+    <div style="width:92vw;max-width:820px;height:80vh;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+      <iframe id="resume-iframe" src="" style="width:100%;height:100%;border:none;"></iframe>
+    </div>
+  </div>
+
+</body>
+</html>
